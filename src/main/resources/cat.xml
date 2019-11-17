@@ -8,13 +8,7 @@
            http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- bean definitions here -->
-    <bean id="userDao"
-          class="by.itacademy.spring.config_xml.DefaultPersonDao"/>
-    <bean id="userService" class="by.itacademy.spring.config_xml.DefaultPersonService"/>
 
-    <bean id="person"
-          class="by.itacademy.spring.model.Person"
-          factory-method="getInstance">
-        <property name="name" value="Nobody"/>
-    </bean>
+    <bean id="cat"
+          class="by.itacademy.spring.config.CatWithXMLConfig"/>
 </beans>
