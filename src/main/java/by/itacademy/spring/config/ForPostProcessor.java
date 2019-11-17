@@ -10,10 +10,15 @@ public class ForPostProcessor {
 
     @MyAnnotation
     public void time(){
-        System.out.println("bla-bla");
-        System.out.println("bla-bla");
-        System.out.println("bla-bla");
-        System.out.println("bla-bla");
-        System.out.println("bla-bla");
+        System.out.println("bla-bla-1");
+    }
+
+    @MyAnnotation
+    public void time2(){
+        System.out.println("bla-bla-2");
+    }
+
+    public void notime(){
+        System.out.println("no-bla-bla");
     }
 }

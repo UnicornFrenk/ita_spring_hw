@@ -25,6 +25,7 @@ public class SpringXmlTests {
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
                 ConfigurationJava.class);
         SaveCat cat = context.getBean(CatWithJavaConfig.class);
+        assertNotNull(cat);
         cat.getMeow();
         context.close();
     }
@@ -103,9 +104,13 @@ public class SpringXmlTests {
     @Test
     void FromPropertiesFileTest() {
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(TwoCatsConfig.class);
         context.scan("by.itacademy.spring");
         context.refresh();
-        SaveCat cat = context.getBean(CatWithPropertiesConfig.class);
+        SaveCat cat1 = context.getBean(SaveCat.class);
+        CatWithPropertiesConfig cat = context.getBean(
+                CatWithPropertiesConfig.class);
+        SaveCat cat2 = context.getBean(CatWithPropertiesConfig.class);
         cat.getMeow();
         context.close();
     }
@@ -116,8 +121,9 @@ public class SpringXmlTests {
         final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("by.itacademy.spring");
         context.refresh();
-        ForPostProcessor postProcessor = context.getBean(ForPostProcessor.class);
-        postProcessor   .time();
+        ForPostProcessor postProcessor = context.getBean(
+                ForPostProcessor.class);
+        postProcessor.time();
         context.close();
     }
 }
