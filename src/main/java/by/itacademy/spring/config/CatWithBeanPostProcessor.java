@@ -40,14 +40,13 @@ public class CatWithBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         List<Method> methods = methodsByBeanName.get(beanName);
-        if (methods != null) {
-            ProxyFactory proxyFactory = new ProxyFactory();
-            proxyFactory.setTarget(bean);
-            proxyFactory.addAdvice(new MI());
-            return proxyFactory.getProxy();
+            if (methods != null) {
+
+                ProxyFactory proxyFactory = new ProxyFactory();
+                proxyFactory.setTarget(bean);
+                proxyFactory.addAdvice(new MI());
+                return proxyFactory.getProxy();
         }
-
-
         return bean;
     }
 
@@ -55,10 +54,15 @@ public class CatWithBeanPostProcessor implements BeanPostProcessor {
         @Override
         public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 
-            Object result = methodInvocation.proceed();
-
-            return result;
+            if (methodInvocation.getMethod()
+                                .isAnnotationPresent(MyAnnotation.class)) {
+                Long startTime = System.currentTimeMillis();
+                java.lang.Object result = methodInvocation.proceed();
+                Long timeMillis = System.currentTimeMillis() - startTime;
+                System.out.println(timeMillis);
+                return result;
+            } else
+            return methodInvocation.proceed();
         }
     }
-
 }

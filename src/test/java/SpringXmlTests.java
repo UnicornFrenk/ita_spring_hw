@@ -38,6 +38,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(CatWithAnnotationConfig.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
     }
 
@@ -49,6 +50,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(CatWithFieldConfiguration.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
     }
 
@@ -60,6 +62,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(CatWithSetterConfig.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
     }
 
@@ -72,6 +75,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(CatWithConstructorConfig.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
     }
 
@@ -83,6 +87,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(TwoCatsConfig.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
     }
 
@@ -95,6 +100,7 @@ public class SpringXmlTests {
         context.refresh();
         SaveCat cat = context.getBean(CatsListConfig.class);
         cat.getMeow();
+        assertNotNull(cat);
         context.close();
 
     }
@@ -103,15 +109,16 @@ public class SpringXmlTests {
     //девять
     @Test
     void FromPropertiesFileTest() {
-        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.register(TwoCatsConfig.class);
-        context.scan("by.itacademy.spring");
-        context.refresh();
+        final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                CatWithPropertiesConfig.class);
+
         SaveCat cat1 = context.getBean(SaveCat.class);
         CatWithPropertiesConfig cat = context.getBean(
                 CatWithPropertiesConfig.class);
         SaveCat cat2 = context.getBean(CatWithPropertiesConfig.class);
         cat.getMeow();
+        assertNotNull(cat1);
+        assertNotNull(cat2);
         context.close();
     }
 
@@ -124,6 +131,8 @@ public class SpringXmlTests {
         ForPostProcessor postProcessor = context.getBean(
                 ForPostProcessor.class);
         postProcessor.time();
+        postProcessor.time2();
+        postProcessor.notime();
         context.close();
     }
 }

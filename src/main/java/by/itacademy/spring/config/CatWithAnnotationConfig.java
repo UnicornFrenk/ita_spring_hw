@@ -1,7 +1,6 @@
 package by.itacademy.spring.config;
 
 import by.itacademy.spring.model.SaveCat;
-import by.itacademy.spring.model.SpringCat;
 import org.springframework.stereotype.Component;
 
 @Component

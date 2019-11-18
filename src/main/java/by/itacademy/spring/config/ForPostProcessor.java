@@ -16,9 +16,15 @@ public class ForPostProcessor {
     @MyAnnotation
     public void time2(){
         System.out.println("bla-bla-2");
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void notime(){
-        System.out.println("no-bla-bla");
-    }
+        System.out.println("вообще без bla-bla");
+
+}
 }
